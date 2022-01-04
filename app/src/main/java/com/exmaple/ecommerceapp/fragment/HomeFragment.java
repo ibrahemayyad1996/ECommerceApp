@@ -5,12 +5,17 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.exmaple.ecommerceapp.R;
+import com.exmaple.ecommerceapp.adapter.CategoryAdapter;
+import com.exmaple.ecommerceapp.adapter.ProductAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +32,10 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private CategoryAdapter categoryAdapter = null;
+    private ProductAdapter productAdapter = null;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -72,5 +81,30 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        RecyclerView rvCategories = view.findViewById(R.id.rvCategories);
+        RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
+
+
+        ArrayList<String> data = new ArrayList<>();
+        data.add("1");
+        data.add("2");
+        data.add("3");
+        data.add("4");
+        data.add("5");
+        data.add("6");
+        data.add("7");
+        data.add("7");
+        data.add("7");
+        data.add("7");
+        data.add("7");
+        data.add("7");
+
+
+        categoryAdapter = new CategoryAdapter(data);
+        rvCategories.setAdapter(categoryAdapter);
+
+
+        productAdapter = new ProductAdapter(data);
+        rvBestSelling.setAdapter(productAdapter);
     }
 }

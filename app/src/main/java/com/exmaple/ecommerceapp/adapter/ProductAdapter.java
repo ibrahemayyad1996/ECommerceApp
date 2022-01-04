@@ -1,0 +1,48 @@
+package com.exmaple.ecommerceapp.adapter;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.exmaple.ecommerceapp.R;
+
+import java.util.ArrayList;
+
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+
+
+    ArrayList<String> data = new ArrayList<String>();
+
+
+    public ProductAdapter(ArrayList<String> data) {
+        this.data = data;
+    }
+
+    @NonNull
+    @Override
+    public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_product,parent,false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return  data.size();
+    }
+
+    class ViewHolder extends  RecyclerView.ViewHolder{
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+}

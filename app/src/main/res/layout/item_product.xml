@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_130sdp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_130sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_image"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BeoPlay Speaker BeoPlay"
+        android:textStyle="bold"
+        android:lines="2"
+        android:maxLines="2"
+        android:layout_margin="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bang and Olufsen"
+        android:lines="1"
+        android:layout_margin="@dimen/_5sdp"
+        android:textColor="#929292"
+        android:textSize="@dimen/_13ssp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$450"
+        android:lines="1"
+        android:maxLines="1"
+        android:layout_margin="@dimen/_5sdp"
+        android:textColor="#00C569"
+        android:textSize="@dimen/_15ssp"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
