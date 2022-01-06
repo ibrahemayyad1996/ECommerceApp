@@ -7,15 +7,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.exmaple.ecommerceapp.R;
 import com.exmaple.ecommerceapp.adapter.CategoryAdapter;
 import com.exmaple.ecommerceapp.adapter.ProductAdapter;
+import com.exmaple.ecommerceapp.api.APIClient;
+import com.exmaple.ecommerceapp.model.Product;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,8 +42,16 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
 
+    private ProgressBar progressBar = null;
     private CategoryAdapter categoryAdapter = null;
     private ProductAdapter productAdapter = null;
+
+    RecyclerView rvCategories =null;
+    RecyclerView rvBestSelling = null;
+
+
+    ArrayList<String> categories = new ArrayList<String>();
+    ArrayList<Product> products = new ArrayList<Product>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -81,30 +97,67 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        RecyclerView rvCategories = view.findViewById(R.id.rvCategories);
-        RecyclerView rvBestSelling = view.findViewById(R.id.rvBestSelling);
+        progressBar = view.findViewById(R.id.progressBar);
+        rvCategories = view.findViewById(R.id.rvCategories);
+        rvBestSelling = view.findViewById(R.id.rvBestSelling);
 
 
-        ArrayList<String> data = new ArrayList<>();
-        data.add("1");
-        data.add("2");
-        data.add("3");
-        data.add("4");
-        data.add("5");
-        data.add("6");
-        data.add("7");
-        data.add("7");
-        data.add("7");
-        data.add("7");
-        data.add("7");
-        data.add("7");
-
-
-        categoryAdapter = new CategoryAdapter(data);
+        categoryAdapter = new CategoryAdapter(categories);
         rvCategories.setAdapter(categoryAdapter);
 
 
-        productAdapter = new ProductAdapter(data);
+        productAdapter = new ProductAdapter(products);
         rvBestSelling.setAdapter(productAdapter);
+
+        getCategories();
+
+
+
+
+    }
+
+
+    private void getCategories() {
+        progressBar.setVisibility(View.VISIBLE);
+        APIClient.getAPIInterface().getCategories().enqueue(new Callback<ArrayList<String>>() {
+            @Override
+            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+                 if (response.isSuccessful()){
+                     categories = response.body();
+                     categoryAdapter = new CategoryAdapter(categories);
+                     rvCategories.setAdapter(categoryAdapter);
+                     getProducts();
+                 }else progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
+                t.printStackTrace();
+                Log.d("getCategories", "onFailure: "+t.getMessage());
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void getProducts() {
+        progressBar.setVisibility(View.VISIBLE);
+
+        APIClient.getAPIInterface().getProducts().enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                if (response.isSuccessful()){
+                    products = response.body();
+                    productAdapter = new ProductAdapter(products);
+                    rvBestSelling.setAdapter(productAdapter);
+                }
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+                t.printStackTrace();
+                Log.d("getCategories", "onFailure: "+t.getMessage());
+            }
+        });
     }
 }

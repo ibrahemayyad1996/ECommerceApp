@@ -7,12 +7,14 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_130sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/test_image"/>
 
     <TextView
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BeoPlay Speaker BeoPlay"
@@ -24,6 +26,7 @@
         android:textSize="@dimen/_15ssp"/>
 
     <TextView
+        android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bang and Olufsen"
@@ -32,8 +35,15 @@
         android:textColor="#929292"
         android:textSize="@dimen/_13ssp"/>
 
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.RatingBar.Small"/>
+
 
     <TextView
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$450"
